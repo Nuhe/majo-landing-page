@@ -392,7 +392,7 @@ main{background:radial-gradient(ellipse 36% 12% at 88% 38%,#d8bf8d2e,transparent
     <div class="channels">
       <a class="channel" href="https://wa.me/5491122533485?text=Hola%20Mar%C3%ADa%20Jos%C3%A9%2C%20quiero%20conocer%20mi%20Plan%20Paraca%C3%ADdas" target="_blank" rel="noopener"><span class="channel__ico" aria-hidden="true">✉</span><span><b>Escribime por WhatsApp</b><span>+54 9 11 2253-3485</span></span></a>
       <a class="channel" href="mailto:berdaguerfinanzas@gmail.com?subject=Consulta%20sobre%20Plan%20Paraca%C3%ADdas"><span class="channel__ico" aria-hidden="true">@</span><span><b>Escribime por email</b><span>berdaguerfinanzas@gmail.com</span></span></a>
-      <button class="channel booking-trigger" id="bookingTrigger" type="button" hidden><span class="channel__ico" aria-hidden="true">◷</span><span><b>Solicitar una reunión</b><span>Presencial o virtual · pendiente de confirmación</span></span></button>
+      <a class="channel booking-trigger" id="bookingTrigger" href="https://wa.me/5491122533485?text=Hola%20Mar%C3%ADa%20Jos%C3%A9%2C%20quiero%20agendar%20una%20reuni%C3%B3n" target="_blank" rel="noopener"><span class="channel__ico" aria-hidden="true">◷</span><span><b>Agendar una reunión</b><span id="bookingTriggerDetail">Solicitala por WhatsApp</span></span></a>
     </div>
   </div>
 </section>
@@ -456,8 +456,16 @@ main{background:radial-gradient(ellipse 36% 12% at 88% 38%,#d8bf8d2e,transparent
   const bookingForm = document.getElementById('bookingForm');
   const bookingStatus = document.getElementById('bookingStatus');
   const bookingSubmit = document.getElementById('bookingSubmit');
-  if (typeof bookingApi === 'string' && /^\/(?!\/)/.test(bookingApi)) bookingTrigger.hidden = false;
-  bookingTrigger.addEventListener('click', () => { bookingStatus.textContent = ''; bookingStatus.removeAttribute('data-state'); bookingDialog.showModal(); document.getElementById('bookingName').focus(); });
+  const bookingEnabled = typeof bookingApi === 'string' && /^\/(?!\/)/.test(bookingApi);
+  if (bookingEnabled) document.getElementById('bookingTriggerDetail').textContent = 'Presencial o virtual · pendiente de confirmación';
+  bookingTrigger.addEventListener('click', event => {
+    if (!bookingEnabled) return;
+    event.preventDefault();
+    bookingStatus.textContent = '';
+    bookingStatus.removeAttribute('data-state');
+    bookingDialog.showModal();
+    document.getElementById('bookingName').focus();
+  });
   for (const id of ['bookingClose', 'bookingCancel']) document.getElementById(id).addEventListener('click', () => bookingDialog.close());
   bookingForm.addEventListener('submit', async event => {
     event.preventDefault();

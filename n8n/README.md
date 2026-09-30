@@ -8,7 +8,7 @@ El archivo [`solicitudes-reunion.json`](solicitudes-reunion.json) es un workflow
 2. El remitente temporal es `camilonrodriguez@gmail.com`. Confirmar que la cuenta SMTP permita enviar desde esa dirección. El destino del aviso es `berdaguerfinanzas@gmail.com`, que también figura como dirección de respuesta en el correo al cliente.
 3. Publicar el workflow. n8n usa una URL de prueba y otra de producción; para el sitio debe usarse la de producción: `/webhook/plan-paracaidas/reunion`.
 4. Servir el sitio y n8n detrás de HTTPS. En el proxy del sitio, dirigir `POST /api/reuniones` al webhook de producción de n8n. Limitar tamaño y frecuencia de las solicitudes; no exponer las credenciales SMTP al navegador.
-5. En el VPS, configurar `booking-config.js` con `window.PLAN_PARACAIDAS_BOOKING_API = '/api/reuniones';`. El archivo incluido en el repositorio deja el valor vacío, por lo que el botón permanece oculto en GitHub Pages mientras no exista el endpoint.
+5. En el VPS, configurar `booking-config.js` con `window.PLAN_PARACAIDAS_BOOKING_API = '/api/reuniones';`. El archivo incluido en el repositorio deja el valor vacío: en GitHub Pages, «Agendar una reunión» abre WhatsApp; con el endpoint configurado, abre el formulario.
 6. Probar una solicitud presencial y una virtual con casillas reales; comprobar ambos correos, el `202` y el caso de datos inválidos (`400`). Revisar también que n8n no conserve indefinidamente ejecuciones con datos personales.
 
 Ejemplo de ruta para Nginx, si el contenedor del sitio comparte red Docker con un servicio llamado `n8n`:
