@@ -260,6 +260,39 @@ main{background:radial-gradient(ellipse 36% 12% at 88% 38%,#d8bf8d2e,transparent
 .footer__nav a:hover{color:#e6bc7b}
 .footer__legal{border-top-color:#c59d6340}
 .fab{background:linear-gradient(120deg,#dcb775,#b98d51);color:#0b2230;box-shadow:0 12px 28px #020b146b}
+.booking-trigger{width:100%;max-width:365px;font:inherit;text-align:left;cursor:pointer}
+.booking-trigger[hidden]{display:none}
+.booking-dialog{width:min(94vw,600px);max-height:min(92dvh,820px);padding:0;border:1px solid #c49a5d;border-radius:28px;background:#f8f5ed;color:#0b2230;box-shadow:0 35px 90px #020b14a6;overflow:auto}
+.booking-dialog::backdrop{background:#03121ccc;backdrop-filter:blur(7px)}
+.booking-form{padding:clamp(1.5rem,4vw,2.6rem)}
+.booking-form__top{display:flex;justify-content:space-between;gap:1.5rem;align-items:flex-start}
+.booking-form__top h2{font-size:clamp(2.4rem,5vw,3.6rem);margin:.45rem 0 .7rem}
+.booking-form__top p{color:#4f6268;font-size:.9rem;max-width:48ch}
+.booking-close{display:grid;place-items:center;flex:none;width:38px;height:38px;border:1px solid #cbb88f;border-radius:50%;background:transparent;color:#0b2230;cursor:pointer;font-size:1.5rem;line-height:1}
+.booking-fields{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin:2rem 0 1.4rem}
+.booking-field{display:flex;flex-direction:column;gap:.4rem}
+.booking-field label,.booking-field legend{font-size:.82rem;font-weight:700}
+.booking-field input{width:100%;min-height:48px;padding:.75rem .9rem;border:1px solid #b7c6c4;border-radius:13px;background:#fffdf8;color:#0b2230;font:inherit;font-size:.9rem}
+.booking-field input:focus{outline:2px solid #a87f47;outline-offset:2px}
+.booking-field--wide{grid-column:1/-1}
+.booking-modes{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;border:0;margin:0;padding:0}
+.booking-modes legend{margin-bottom:.7rem}
+.booking-modes label{position:relative;display:block}
+.booking-modes input{position:absolute;width:1px;height:1px;opacity:0}
+.booking-modes span{display:block;padding:.8rem 1rem;border:1px solid #aebdba;border-radius:13px;text-align:center;cursor:pointer;background:#fffdf8}
+.booking-modes input:checked+span{border-color:#a87f47;background:#f3e6ca;box-shadow:inset 0 0 0 1px #a87f47}
+.booking-modes input:focus-visible+span{outline:3px solid #a87f47;outline-offset:3px}
+.booking-consent{display:flex;gap:.7rem;align-items:flex-start;margin:1.5rem 0 1rem;color:#4f6268;font-size:.8rem;line-height:1.5}
+.booking-consent input{margin-top:.2rem;accent-color:#0d3a47}
+.booking-consent a{color:#755029;text-decoration:underline}
+.booking-form__actions{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-top:1.5rem}
+.booking-form__actions button{border:0;cursor:pointer}
+.booking-form__actions button:disabled{opacity:.7;cursor:wait}
+.booking-form__secondary{background:transparent;color:#0b2230;padding:.8rem}
+.booking-status{min-height:1.5em;margin-top:1rem;font-size:.88rem;font-weight:700}
+.booking-status[data-state="error"]{color:#9b332b}
+.booking-status[data-state="success"]{color:#176044}
+.booking-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 @media(max-width:1080px){
  .nav__links{background:#0b2733;border:1px solid #c69d6159;box-shadow:0 15px 40px #020b14a8}
  .nav__links a:hover{background:#ffffff12}
@@ -273,6 +306,9 @@ main{background:radial-gradient(ellipse 36% 12% at 88% 38%,#d8bf8d2e,transparent
  .hero::after{bottom:-2px;height:130px}
  .badge-float{max-width:250px}
  .contact::before{border-radius:48% 52% 0 0 / 6% 7% 0 0}
+ .booking-dialog{width:100vw;max-width:none;height:100dvh;max-height:none;border:0;border-radius:0}
+ .booking-fields{grid-template-columns:1fr}
+ .booking-field--wide{grid-column:auto}
 }
 </style>
 </head>
@@ -356,20 +392,40 @@ main{background:radial-gradient(ellipse 36% 12% at 88% 38%,#d8bf8d2e,transparent
     <div class="channels">
       <a class="channel" href="https://wa.me/5491122533485?text=Hola%20Mar%C3%ADa%20Jos%C3%A9%2C%20quiero%20conocer%20mi%20Plan%20Paraca%C3%ADdas" target="_blank" rel="noopener"><span class="channel__ico" aria-hidden="true">✉</span><span><b>Escribime por WhatsApp</b><span>+54 9 11 2253-3485</span></span></a>
       <a class="channel" href="mailto:berdaguerfinanzas@gmail.com?subject=Consulta%20sobre%20Plan%20Paraca%C3%ADdas"><span class="channel__ico" aria-hidden="true">@</span><span><b>Escribime por email</b><span>berdaguerfinanzas@gmail.com</span></span></a>
+      <button class="channel booking-trigger" id="bookingTrigger" type="button" hidden><span class="channel__ico" aria-hidden="true">◷</span><span><b>Solicitar una reunión</b><span>Presencial o virtual · pendiente de confirmación</span></span></button>
     </div>
   </div>
 </section>
 </main>
+<dialog class="booking-dialog" id="bookingDialog" aria-labelledby="bookingTitle">
+  <form class="booking-form" id="bookingForm" novalidate>
+    <div class="booking-form__top">
+      <div><span class="eyebrow">Plan Paracaídas</span><h2 id="bookingTitle">Solicitar una reunión</h2><p>Dejanos tus datos y la modalidad que preferís. María José se pondrá en contacto para coordinar el día y el horario.</p></div>
+      <button class="booking-close" type="button" id="bookingClose" aria-label="Cerrar formulario">×</button>
+    </div>
+    <div class="booking-fields">
+      <div class="booking-field"><label for="bookingName">Nombre y apellido</label><input id="bookingName" name="nombre" autocomplete="name" minlength="2" maxlength="120" required></div>
+      <div class="booking-field"><label for="bookingEmail">Email</label><input id="bookingEmail" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+      <div class="booking-field booking-field--wide"><label for="bookingPhone">Teléfono</label><input id="bookingPhone" name="telefono" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" required></div>
+      <fieldset class="booking-field booking-field--wide booking-modes"><legend>Modalidad de reunión</legend><label><input type="radio" name="modalidad" value="Presencial" required><span>Presencial</span></label><label><input type="radio" name="modalidad" value="Virtual" required><span>Virtual</span></label></fieldset>
+    </div>
+    <div class="booking-hp" aria-hidden="true"><label for="bookingWebsite">Dejar vacío</label><input id="bookingWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+    <label class="booking-consent"><input id="bookingConsent" type="checkbox" required><span>Leí el <a href="privacidad.html" target="_blank" rel="noopener">aviso de privacidad</a> y autorizo a María José Berdaguer a usar estos datos para responder mi solicitud de reunión.</span></label>
+    <div class="booking-form__actions"><button class="btn" id="bookingSubmit" type="submit">Enviar solicitud</button><button class="booking-form__secondary" id="bookingCancel" type="button">Cancelar</button></div>
+    <p class="booking-status" id="bookingStatus" role="status" aria-live="polite"></p>
+  </form>
+</dialog>
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer__top">
       <a class="footer__brand" href="#inicio"><img class="brand__mark" src="logo.jpeg" alt="" width="1254" height="1254"><span class="brand__txt"><b>Plan Paracaídas</b><span>María José Berdaguer · Asesora en planificación financiera</span></span></a>
-      <nav class="footer__nav" aria-label="Navegación del pie"><a href="#conoceme">Conoceme</a><a href="#areas">Qué podemos cuidar</a><a href="#metodo">El plan</a><a href="#contacto">Contacto</a></nav>
+      <nav class="footer__nav" aria-label="Navegación del pie"><a href="#conoceme">Conoceme</a><a href="#areas">Qué podemos cuidar</a><a href="#metodo">El plan</a><a href="#contacto">Contacto</a><a href="privacidad.html">Privacidad</a></nav>
     </div>
     <div class="footer__legal"><p>© <span id="year">2026</span> María José Berdaguer. Plan Paracaídas.</p></div>
   </div>
 </footer>
 <a class="fab" id="fab" href="https://wa.me/5491122533485?text=Hola%20Mar%C3%ADa%20Jos%C3%A9%2C%20quiero%20conocer%20mi%20Plan%20Paraca%C3%ADdas" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">WhatsApp</a>
+<script src="booking-config.js"></script>
 <script>
 (() => {
   const header = document.getElementById('header');
@@ -393,6 +449,57 @@ main{background:radial-gradient(ellipse 36% 12% at 88% 38%,#d8bf8d2e,transparent
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) items.forEach(el => el.classList.add('is-in'));
   else { const io = new IntersectionObserver((entries, obs) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-in'); obs.unobserve(entry.target); } }); }, { threshold: 0.08 }); items.forEach(el => io.observe(el)); }
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  const bookingApi = window.PLAN_PARACAIDAS_BOOKING_API;
+  const bookingTrigger = document.getElementById('bookingTrigger');
+  const bookingDialog = document.getElementById('bookingDialog');
+  const bookingForm = document.getElementById('bookingForm');
+  const bookingStatus = document.getElementById('bookingStatus');
+  const bookingSubmit = document.getElementById('bookingSubmit');
+  if (typeof bookingApi === 'string' && /^\/(?!\/)/.test(bookingApi)) bookingTrigger.hidden = false;
+  bookingTrigger.addEventListener('click', () => { bookingStatus.textContent = ''; bookingStatus.removeAttribute('data-state'); bookingDialog.showModal(); document.getElementById('bookingName').focus(); });
+  for (const id of ['bookingClose', 'bookingCancel']) document.getElementById(id).addEventListener('click', () => bookingDialog.close());
+  bookingForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!bookingForm.reportValidity()) return;
+    const telefono = bookingForm.elements.telefono.value.trim();
+    if ((telefono.match(/\d/g) || []).length < 8) {
+      bookingStatus.textContent = 'Revisá el número de teléfono.';
+      bookingStatus.dataset.state = 'error';
+      bookingForm.elements.telefono.focus();
+      return;
+    }
+    bookingSubmit.disabled = true;
+    bookingSubmit.textContent = 'Enviando…';
+    bookingStatus.textContent = '';
+    bookingStatus.removeAttribute('data-state');
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000);
+    try {
+      const response = await fetch(bookingApi, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: controller.signal,
+        body: JSON.stringify({
+          nombre: bookingForm.elements.nombre.value.trim(),
+          email: bookingForm.elements.email.value.trim(),
+          telefono, modalidad: bookingForm.elements.modalidad.value,
+          consentimiento: document.getElementById('bookingConsent').checked,
+          website: bookingForm.elements.website.value
+        })
+      });
+      const result = await response.json().catch(() => null);
+      if (!response.ok || result?.status !== 'pending') throw new Error('No se pudo registrar la solicitud');
+      bookingForm.reset();
+      bookingStatus.textContent = 'Recibimos tu solicitud. Te enviamos un correo y pronto nos pondremos en contacto para coordinar la reunión.';
+      bookingStatus.dataset.state = 'success';
+    } catch (_) {
+      bookingStatus.textContent = 'No pudimos confirmar la solicitud. Revisá tu email; si no llega la confirmación, escribinos por WhatsApp.';
+      bookingStatus.dataset.state = 'error';
+    } finally {
+      clearTimeout(timeout);
+      bookingSubmit.disabled = false;
+      bookingSubmit.textContent = 'Enviar solicitud';
+    }
+  });
 })();
 </script>
 </body>
