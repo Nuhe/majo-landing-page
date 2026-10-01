@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.majo.rule=Host(`${MAJO_DOMAIN}`) || Host(`www.${MAJO_DOMAIN}`)
+      - traefik.http.routers.majo.entrypoints=websecure
+      - traefik.http.routers.majo.tls=true
+      - traefik.http.routers.majo.tls.certresolver=letsencrypt
+      - traefik.http.services.majo.loadbalancer.server.port=80

@@ -1,0 +1,7 @@
+.git
+*
+!index.html
+!privacidad.html
+!booking-config.js
+!logo.jpeg
+!majo.jpeg
