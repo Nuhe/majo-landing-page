@@ -2,6 +2,13 @@ services:
   web:
     build: .
     restart: unless-stopped
+    volumes:
+      - type: bind
+        source: ./public
+        target: /usr/share/nginx/html
+        read_only: true
+        bind:
+          create_host_path: false
     labels:
       - traefik.enable=true
       - traefik.http.routers.majo.rule=Host(`${MAJO_DOMAIN}`) || Host(`www.${MAJO_DOMAIN}`)
