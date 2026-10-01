@@ -327,7 +327,7 @@ main{background:radial-gradient(ellipse 36% 12% at 88% 38%,#d8bf8d2e,transparent
       <a href="#metodo">El plan</a>
       <a href="#contacto">Contacto</a>
     </nav>
-    <a class="btn btn--sm nav__cta" href="https://wa.me/5491122533485?text=Hola%20Mar%C3%ADa%20Jos%C3%A9%2C%20quiero%20conocer%20mi%20Plan%20Paraca%C3%ADdas" target="_blank" rel="noopener">Hablemos por WhatsApp</a>
+    <a class="btn btn--sm nav__cta" href="mailto:berdaguerfinanzas@gmail.com?subject=Consulta%20sobre%20Plan%20Paraca%C3%ADdas">Hablemos por email</a>
     <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">
       <svg class="ico-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       <svg class="ico-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -390,9 +390,8 @@ main{background:radial-gradient(ellipse 36% 12% at 88% 38%,#d8bf8d2e,transparent
     <h2>Hablemos de lo que querés cuidar.</h2>
     <p class="contact__lead">Contame qué te preocupa o qué te gustaría planificar. Empezamos por escuchar tu historia.</p>
     <div class="channels">
-      <a class="channel" href="https://wa.me/5491122533485?text=Hola%20Mar%C3%ADa%20Jos%C3%A9%2C%20quiero%20conocer%20mi%20Plan%20Paraca%C3%ADdas" target="_blank" rel="noopener"><span class="channel__ico" aria-hidden="true">✉</span><span><b>Escribime por WhatsApp</b><span>+54 9 11 2253-3485</span></span></a>
       <a class="channel" href="mailto:berdaguerfinanzas@gmail.com?subject=Consulta%20sobre%20Plan%20Paraca%C3%ADdas"><span class="channel__ico" aria-hidden="true">@</span><span><b>Escribime por email</b><span>berdaguerfinanzas@gmail.com</span></span></a>
-      <a class="channel booking-trigger" id="bookingTrigger" href="https://wa.me/5491122533485?text=Hola%20Mar%C3%ADa%20Jos%C3%A9%2C%20quiero%20agendar%20una%20reuni%C3%B3n" target="_blank" rel="noopener"><span class="channel__ico" aria-hidden="true">◷</span><span><b>Agendar una reunión</b><span id="bookingTriggerDetail">Solicitala por WhatsApp</span></span></a>
+      <a class="channel booking-trigger" id="bookingTrigger" href="mailto:berdaguerfinanzas@gmail.com?subject=Solicitud%20de%20reuni%C3%B3n%20-%20Plan%20Paraca%C3%ADdas"><span class="channel__ico" aria-hidden="true">◷</span><span><b>Agendar una reunión</b><span id="bookingTriggerDetail">Solicitala por email</span></span></a>
     </div>
   </div>
 </section>
@@ -424,7 +423,7 @@ main{background:radial-gradient(ellipse 36% 12% at 88% 38%,#d8bf8d2e,transparent
     <div class="footer__legal"><p>© <span id="year">2026</span> María José Berdaguer. Plan Paracaídas.</p></div>
   </div>
 </footer>
-<a class="fab" id="fab" href="https://wa.me/5491122533485?text=Hola%20Mar%C3%ADa%20Jos%C3%A9%2C%20quiero%20conocer%20mi%20Plan%20Paraca%C3%ADdas" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">WhatsApp</a>
+<a class="fab" id="fab" href="mailto:berdaguerfinanzas@gmail.com?subject=Consulta%20sobre%20Plan%20Paraca%C3%ADdas" aria-label="Escribir por email">Email</a>
 <script src="booking-config.js"></script>
 <script>
 (() => {
@@ -500,7 +499,7 @@ main{background:radial-gradient(ellipse 36% 12% at 88% 38%,#d8bf8d2e,transparent
       bookingStatus.textContent = 'Recibimos tu solicitud. Te enviamos un correo y pronto nos pondremos en contacto para coordinar la reunión.';
       bookingStatus.dataset.state = 'success';
     } catch (_) {
-      bookingStatus.textContent = 'No pudimos confirmar la solicitud. Revisá tu email; si no llega la confirmación, escribinos por WhatsApp.';
+      bookingStatus.textContent = 'No pudimos confirmar la solicitud. Revisá tu email; si no llega la confirmación, escribinos a berdaguerfinanzas@gmail.com.';
       bookingStatus.dataset.state = 'error';
     } finally {
       clearTimeout(timeout);

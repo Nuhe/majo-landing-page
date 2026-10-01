@@ -1,6 +1,6 @@
 # Publicar Plan Paracaídas en el VPS de Hostinger
 
-El sitio es estático. `compose.yaml` lo sirve con Nginx y lo conecta al Traefik que ya ocupa los puertos 80 y 443 del VPS. El formulario de reuniones sigue ofreciendo WhatsApp hasta que se configure su webhook y correo en n8n.
+El sitio es estático. `compose.yaml` lo sirve con Nginx y lo conecta al Traefik que ya ocupa los puertos 80 y 443 del VPS. La solicitud de reuniones abre el correo electrónico hasta que se configure su webhook y correo en n8n.
 
 ## Dominio y DNS
 
