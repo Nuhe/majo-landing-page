@@ -1,6 +1,6 @@
 # Publicar Plan Paracaídas en el VPS de Hostinger
 
-El sitio es estático. `compose.yaml` lo sirve con Nginx y lo conecta al Traefik que ya ocupa los puertos 80 y 443 del VPS. La solicitud de reuniones abre el correo electrónico hasta que se configure su webhook y correo en n8n.
+El sitio es estático. `compose.yaml` lo sirve con Nginx y lo conecta al Traefik que ya ocupa los puertos 80 y 443 del VPS. La solicitud de reuniones abre el correo electrónico hasta que se configure su webhook y correo en n8n. Los cambios en `Dockerfile`, `compose.yaml` o `nginx/default.conf` requieren reconstruir el contenedor con Docker Compose; Jenkins solo publica los archivos del sitio.
 
 ## Dominio y DNS
 

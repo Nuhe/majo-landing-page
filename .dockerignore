@@ -5,3 +5,5 @@
 !booking-config.js
 !logo.jpeg
 !majo.jpeg
+!nginx/
+!nginx/default.conf
