@@ -144,8 +144,8 @@ main{position:relative;overflow:hidden;isolation:isolate;background:radial-gradi
 .footer__top{display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
 .footer__nav{display:flex;gap:1.5rem;flex-wrap:wrap}
 .footer__legal{margin-top:2rem;padding-top:1.2rem;border-top:1px solid #dad7ed;color:var(--muted);font-size:.72rem}
-.fab{position:fixed;right:20px;bottom:20px;z-index:90;padding:.85rem 1.25rem;border-radius:30px;background:var(--purple);color:white;text-decoration:none;font-size:.8rem;font-weight:800;box-shadow:0 12px 28px #3a2a7445;opacity:0;visibility:hidden;transform:translateY(15px);transition:.25s}
-.fab.is-visible{opacity:1;visibility:visible;transform:none}
+.fab{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom));z-index:90;padding:.85rem 1.25rem;border-radius:30px;background:var(--purple);color:white;text-decoration:none;font-size:.8rem;font-weight:800;box-shadow:0 12px 28px #3a2a7445;transition:transform .2s,box-shadow .2s}
+.fab:hover{transform:translateY(-3px);box-shadow:0 16px 34px #3a2a7460}
 @media(max-width:1080px){
   .nav__cta{display:none}
   .nav__toggle{display:grid}
@@ -327,7 +327,7 @@ main{background:radial-gradient(ellipse 36% 12% at 88% 38%,#d8bf8d2e,transparent
       <a href="#metodo">El plan</a>
       <a href="#contacto">Contacto</a>
     </nav>
-    <a class="btn btn--sm nav__cta" href="mailto:berdaguerfinanzas@gmail.com?subject=Consulta%20sobre%20Plan%20Paraca%C3%ADdas">Hablemos por email</a>
+    <a class="btn btn--sm nav__cta" href="https://wa.me/5491122533485" target="_blank" rel="noopener noreferrer" aria-label="Escribile a María José por WhatsApp">Hablemos por WhatsApp</a>
     <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">
       <svg class="ico-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       <svg class="ico-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -390,6 +390,7 @@ main{background:radial-gradient(ellipse 36% 12% at 88% 38%,#d8bf8d2e,transparent
     <h2>Hablemos de lo que querés cuidar.</h2>
     <p class="contact__lead">Contame qué te preocupa o qué te gustaría planificar. Empezamos por escuchar tu historia.</p>
     <div class="channels">
+      <a class="channel" href="https://wa.me/5491122533485" target="_blank" rel="noopener noreferrer" aria-label="Escribile a María José por WhatsApp"><span class="channel__ico" aria-hidden="true">✆</span><span><b>Escribime por WhatsApp</b><span>Abrí el chat con María José</span></span></a>
       <a class="channel" href="mailto:berdaguerfinanzas@gmail.com?subject=Consulta%20sobre%20Plan%20Paraca%C3%ADdas"><span class="channel__ico" aria-hidden="true">@</span><span><b>Escribime por email</b><span>berdaguerfinanzas@gmail.com</span></span></a>
       <a class="channel booking-trigger" id="bookingTrigger" href="mailto:berdaguerfinanzas@gmail.com?subject=Solicitud%20de%20reuni%C3%B3n%20-%20Plan%20Paraca%C3%ADdas"><span class="channel__ico" aria-hidden="true">◷</span><span><b>Agendar una reunión</b><span id="bookingTriggerDetail">Solicitala por email</span></span></a>
     </div>
@@ -423,16 +424,14 @@ main{background:radial-gradient(ellipse 36% 12% at 88% 38%,#d8bf8d2e,transparent
     <div class="footer__legal"><p>© <span id="year">2026</span> María José Berdaguer. Plan Paracaídas.</p></div>
   </div>
 </footer>
-<a class="fab" id="fab" href="mailto:berdaguerfinanzas@gmail.com?subject=Consulta%20sobre%20Plan%20Paraca%C3%ADdas" aria-label="Escribir por email">Email</a>
+<a class="fab" id="fab" href="https://wa.me/5491122533485" target="_blank" rel="noopener noreferrer" aria-label="Escribile a María José por WhatsApp">WhatsApp</a>
 <script src="booking-config.js"></script>
 <script>
 (() => {
   const header = document.getElementById('header');
-  const fab = document.getElementById('fab');
   let ticking = false;
   const onScroll = () => {
     header.classList.toggle('is-stuck', window.scrollY > 8);
-    fab.classList.toggle('is-visible', window.scrollY > 600);
     ticking = false;
   };
   window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
